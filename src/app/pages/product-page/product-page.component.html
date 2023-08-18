@@ -1,0 +1,21 @@
+<mat-form-field class="example-full-width" style="margin-left: 20px; margin-top: 20px">
+  <mat-label>Filter products</mat-label>
+  <input
+    matInput
+    [(ngModel)]="term"
+    >
+</mat-form-field>
+
+<div *ngIf="loading" style="position: absolute; z-index: 10; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="productsService.products">
+  <mat-grid-list cols="4" gutterSize="50px">
+    <div *ngFor="let product of productsService.products | filterProducts:term; let i = index">
+      <mat-grid-tile >
+        <app-product style="height: 100%" [product]="product"></app-product>
+      </mat-grid-tile>
+    </div>
+  </mat-grid-list>
+</div>
